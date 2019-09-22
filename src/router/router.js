@@ -44,7 +44,7 @@ const routes = [
   },
   {
     path: '/musicList/:type/:id',
-    meta: { index: 2 },//meta对象的index用来定义当前路由的层级,由小到大,由低到高 
+    meta: { index: 5 },//meta对象的index用来定义当前路由的层级,由小到大,由低到高 
     component: musicList
   },
   { path: '', redirect: '/home' },
