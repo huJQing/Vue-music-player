@@ -19,62 +19,64 @@
       </div>
     </section>
 
-    <section id="plusMusicPlayer" v-show="showPlus" @touchmove.prevent @scroll.prevent>
-      <div
-        class="bg bg-blur"
-        v-if="currentSong.al"
-        :style="{ backgroundImage:'url('+ httpToHttps(currentSong.al.picUrl ) +'), linear-gradient(rgb(25, 0, 0), rgb(0, 0, 55))'}"
-      ></div>
-
-      <div class="topBar">
-        <img class="hiddenButton" src="../assets/return_down.png" @click="hiddenPlusMusicPlayer" />
-        <div class="musciName">{{currentSong.name}}</div>
-        <div class="artists" v-if="currentSong.ar">{{currentSong.ar[0].name}}</div>
-      </div>
-
-      <div class="albumPicContainer">
-        <img
-          :src="currentSong.al.picUrl + '?param=300y300' | httpToHttps"
-          class="albumPic"
+    <transition name="plusMusicPlayerFade">
+      <section id="plusMusicPlayer" v-show="showPlus" @touchmove.prevent @scroll.prevent>
+        <div
+          class="bg bg-blur"
           v-if="currentSong.al"
-        />
-      </div>
+          :style="{ backgroundImage:'url('+ httpToHttps(currentSong.al.picUrl ) +'), linear-gradient(rgb(25, 0, 0), rgb(0, 0, 55))'}"
+        ></div>
 
-      <div class="progress">
-        <div class="startTime">{{currentDuration | timeFormat}}</div>
-        <progress-bar
-          @percentChange="percentChange"
-          @percentChangeEnd="percentChangeEnd"
-          class="progress-bar"
-          :percentage="currentPercentage"
-        ></progress-bar>
-        <div class="endTime" v-if="currentSong">{{currentSong.dt | timeFormat}}</div>
-      </div>
+        <div class="topBar">
+          <img class="hiddenButton" src="../assets/return_down.png" @click="hiddenPlusMusicPlayer" />
+          <div class="musciName">{{currentSong.name}}</div>
+          <div class="artists" v-if="currentSong.ar">{{currentSong.ar[0].name}}</div>
+        </div>
 
-      <div class="musicContorl">
-        <div class="contorlIcon">
-          <img class="small-icon" :src="currentPlayMode.img" @click="changePlayMode" />
-        </div>
-        <div class="contorlIcon">
-          <img class="middel-icon" src="../assets/pre-music.png" @click="playPreMusic" />
-        </div>
-        <div class="contorlIcon">
+        <div class="albumPicContainer">
           <img
-            class="large-icon"
-            :src="currentPlayFlag ? require('../assets/pause-music.png') :require('../assets/start-music.png')"
-            @click="playMusic"
+            :src="currentSong.al.picUrl + '?param=300y300' | httpToHttps"
+            class="albumPic"
+            v-if="currentSong.al"
           />
         </div>
-        <div class="contorlIcon">
-          <img class="middel-icon" src="../assets/next-music.png" @click="playNextMusic" />
-        </div>
-        <div class="contorlIcon">
-          <img class="small-icon" src="../assets/music-list.png" @click="showPlayList = true" />
-        </div>
-      </div>
 
-      <audio ref="audio" autoplay @timeupdate="updateTime" @ended="musicEnd"></audio>
-    </section>
+        <div class="progress">
+          <div class="startTime">{{currentDuration | timeFormat}}</div>
+          <progress-bar
+            @percentChange="percentChange"
+            @percentChangeEnd="percentChangeEnd"
+            class="progress-bar"
+            :percentage="currentPercentage"
+          ></progress-bar>
+          <div class="endTime" v-if="currentSong">{{currentSong.dt | timeFormat}}</div>
+        </div>
+
+        <div class="musicContorl">
+          <div class="contorlIcon">
+            <img class="small-icon" :src="currentPlayMode.img" @click="changePlayMode" />
+          </div>
+          <div class="contorlIcon">
+            <img class="middel-icon" src="../assets/pre-music.png" @click="playPreMusic" />
+          </div>
+          <div class="contorlIcon">
+            <img
+              class="large-icon"
+              :src="currentPlayFlag ? require('../assets/pause-music.png') :require('../assets/start-music.png')"
+              @click="playMusic"
+            />
+          </div>
+          <div class="contorlIcon">
+            <img class="middel-icon" src="../assets/next-music.png" @click="playNextMusic" />
+          </div>
+          <div class="contorlIcon">
+            <img class="small-icon" src="../assets/music-list.png" @click="showPlayList = true" />
+          </div>
+        </div>
+
+        <audio ref="audio" autoplay @timeupdate="updateTime" @ended="musicEnd"></audio>
+      </section>
+    </transition>
 
     <!--播放列表-->
     <play-list class="playList" v-if="showPlayList" @hiddenPlayList="hiddenPlayListControl"></play-list>
@@ -499,6 +501,20 @@ export default {
         }
       }
     }
+  }
+
+  .plusMusicPlayerFade-enter-to {
+    transition: transform 0.8s;
+  }
+  .plusMusicPlayerFade-enter {
+    transform: translateY(1000px);
+  }
+  .plusMusicPlayerFade-leave-active {
+    transition: transform 0.8s;
+  }
+  .plusMusicPlayerFade-leave-to
+    /* .slide-fade-leave-active for below version 2.1.8 */ {
+    transform: translateY(1000px);
   }
 
   .playList {

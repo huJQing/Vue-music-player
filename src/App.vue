@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <!-- <transition name="musicListFade"> -->
     <router-view></router-view>
+    <!-- </transition> -->
     <music-player id="MusicPlayer"></music-player>
   </div>
 </template>
@@ -9,7 +11,7 @@
 import MusicPlayer from './components/MusicPlayer'
 export default {
   name: 'app',
-  components: { MusicPlayer }
+  components: { MusicPlayer },
 }
 </script>
 
@@ -23,5 +25,21 @@ export default {
     left: 0;
     z-index: 999999;
   }
+
+  // .musicListFade-enter-to {
+  //   transition: all 0.8s;
+  // }
+  // .musicListFade-enter {
+  //   transform: translateX(500px);
+  //   opacity: 0.5;
+  // }
+  // .musicListFade-leave-active {
+  //   transition: all 0.8s;
+  // }
+  // .musicListFade-leave-to
+  //   /* .slide-fade-leave-active for below version 2.1.8 */ {
+  //   transform: translateX(500px);
+  //   opacity: 0.5;
+  // }
 }
 </style>
