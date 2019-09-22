@@ -1,7 +1,9 @@
 <template>
   <div id="home">
     <top-bar></top-bar>
-    <router-view></router-view>
+    <transition :name="transitionName">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 

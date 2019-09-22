@@ -360,6 +360,7 @@ export default {
     right: 0;
     z-index: 999999;
     background: $globalContentBackColor;
+    overflow: hidden;
     .bg {
       width: 100%;
       height: 100vh;
@@ -503,18 +504,13 @@ export default {
     }
   }
 
-  .plusMusicPlayerFade-enter-to {
-    transition: transform 0.8s;
-  }
-  .plusMusicPlayerFade-enter {
-    transform: translateY(1000px);
-  }
+  .plusMusicPlayerFade-enter-to,
   .plusMusicPlayerFade-leave-active {
     transition: transform 0.8s;
   }
-  .plusMusicPlayerFade-leave-to
+  .plusMusicPlayerFade-enter,.plusMusicPlayerFade-leave-to
     /* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform: translateY(1000px);
+    transform: translateY(100%);
   }
 
   .playList {

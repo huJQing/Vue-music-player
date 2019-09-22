@@ -12,27 +12,41 @@ import musicList from '../pages/musicList'
 
 const routes = [
   {
-    path: '/home', component: home,
+    path: '/home',
+    component: home,
+    meta: { index: 0 },//meta对象的index用来定义当前路由的层级,由小到大,由低到高
     children: [
       {
-        path: '/home', component: recommend,
-        meta: { index: 1 }
+        path: '/home',
+        name: 'home',
+        meta: { index: 1 },
+        component: recommend,
       },
       {
-        path: '/rank', component: rank,
-        meta: { index: 2 }
+        path: '/rank',
+        name: 'rank',
+        meta: { index: 2 },
+        component: rank
       },
       {
-        path: '/singer', component: singer,
-        meta: { index: 3 }
+        path: '/singer',
+        name: 'singer',
+        meta: { index: 3 },
+        component: singer
       },
       {
-        path: '/serch', component: serch,
-        meta: { index: 4 }
+        path: '/serch',
+        name: 'serch',
+        meta: { index: 4 },
+        component: serch
       }
     ],
   },
-  { path: '/musicList/:type/:id', component: musicList },
+  {
+    path: '/musicList/:type/:id',
+    meta: { index: 2 },//meta对象的index用来定义当前路由的层级,由小到大,由低到高 
+    component: musicList
+  },
   { path: '', redirect: '/home' },
   { path: '/', redirect: '/home' }
 ]

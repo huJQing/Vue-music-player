@@ -1,18 +1,20 @@
 <template>
-  <div id="musicList">
-    <div class="topBar" :style="'background: rgba(100,208,156, '+ topBarAlpha +');'">
-      <img class="returnButton" src="../assets/return-left.png" @click="returnPrePage" />
-    </div>
+  <transition name="musicListFade" mode="in-out">
+    <div id="musicList">
+      <div class="topBar" :style="'background: rgba(100,208,156, '+ topBarAlpha +');'">
+        <img class="returnButton" src="../assets/return-left.png" @click="returnPrePage" />
+      </div>
 
-    <div
-      class="playListInfo"
-      :style="{ backgroundImage:'url('+ httpToHttps(playListType == 'songlist' ? playListInfo.coverImgUrl : playListInfo.img1v1Url ) +')'}"
-    >
-      <div class="listName">{{playListInfo.name}}</div>
-    </div>
+      <div
+        class="playListInfo"
+        :style="{ backgroundImage:'url('+ httpToHttps(playListType == 'songlist' ? playListInfo.coverImgUrl : playListInfo.img1v1Url ) +')'}"
+      >
+        <div class="listName">{{playListInfo.name}}</div>
+      </div>
 
-    <song-list :songList="playList" id="SongList"></song-list>
-  </div>
+      <song-list :songList="playList" id="SongList"></song-list>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -78,6 +80,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.musicListFade-enter-active {
+  transition: all 0.3s ease;
+}
+.musicListFade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.musicListFade-enter, .musicListFade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
 #musicList {
   .topBar {
     width: 100%;
