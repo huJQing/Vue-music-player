@@ -68,7 +68,7 @@ export default {
       })
     },
     gotoRankList(e) {
-      router.push('/playList/songlist/' + e)
+      router.push('/musicList/songlist/' + e)
     }
   },
   mounted() {

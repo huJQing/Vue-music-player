@@ -8,7 +8,7 @@ import recommend from '../pages/recommend'
 import rank from '../pages/rank'
 import singer from '../pages/singer'
 import serch from '../pages/serch'
-import playList from '../pages/playList'
+import musicList from '../pages/musicList'
 
 const routes = [
   {
@@ -32,7 +32,7 @@ const routes = [
       }
     ],
   },
-  { path: '/playList/:type/:id', component: playList },
+  { path: '/musicList/:type/:id', component: musicList },
   { path: '', redirect: '/home' },
   { path: '/', redirect: '/home' }
 ]

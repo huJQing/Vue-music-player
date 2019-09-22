@@ -42,7 +42,7 @@ export default {
       })
     },
     gotoPlayList(e) {
-      router.push('/playList/songlist/' + e)
+      router.push('/musicList/songlist/' + e)
     }
   },
   mounted() {

@@ -9,27 +9,37 @@ function findIndex(list, song) {
 //插入歌曲
 export const insertSong = function ({ commit, state }, song) {
   let playlist = state.playlist
-  window.console.log(playlist)
   let currentIndex = state.currentIndex
   let index = findIndex(state.playlist, song)
-  currentIndex++
-  playlist.splice(currentIndex, 0, song)
 
   if (index > -1) {
-    // 如果当前插入的序号大于列列表中的序号
-    if (currentIndex > index) {
-      // 删掉
-      playlist.splice(index, 1)
-      // 因为删除后数组前移，所以 Index--
-      currentIndex--
-    } else {
-      playlist.splice(index + 1, 1)
-    }
+    currentIndex = index
+  } else {
+    currentIndex++
+    playlist.splice(currentIndex, 0, song)
   }
+
 
   commit(types.SET_PLAYLIST_STATE, playlist)
   commit(types.SET_CURRENTINDEX_STATE, currentIndex)
   commit(types.SET_CURRENTSONG_STATE, playlist[currentIndex])
+  commit(types.SET_CURRENTPLAYFLAG_STATE, false)
+}
+
+
+//删除播放列表歌曲
+export const deleteSong = function ({ commit, state }, song) {
+  let playlist = state.playlist
+  let index = findIndex(state.playlist, song)
+  playlist.splice(index, 1)
+
+  window.console.log(index, state.playlist.length)
+  if (index == state.playlist.length) {
+    index--
+  }
+  commit(types.SET_PLAYLIST_STATE, playlist)
+  commit(types.SET_CURRENTINDEX_STATE, index)
+  commit(types.SET_CURRENTSONG_STATE, playlist[index])
   commit(types.SET_CURRENTPLAYFLAG_STATE, false)
 }
 

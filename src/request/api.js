@@ -38,3 +38,6 @@ export const getSongUrl = p => get(url + '/song/url', p)
 
 /*获取歌曲详情*/
 export const getSongsDetail = p => get(url + '/song/detail', p)
+
+/*新歌速递*/
+export const getTopSong = p => get(url + '/top/song', p)

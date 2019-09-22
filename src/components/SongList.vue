@@ -35,14 +35,12 @@ export default {
     return {
     }
   },
-  watch: {
-    songList() {
-    }
-  },
   props: {
+    //歌曲列表
     songList: {
       type: Array
     },
+    //是否是无数据
     noData: {
       type: Boolean,
       default: false
@@ -70,7 +68,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#SongList {
+.SongList {
   padding: 10px;
   border-radius: 12px;
   background: $globalContentBackColor;

@@ -1,6 +1,6 @@
 <template>
-  <div id="playList">
-    <div class="topBar">
+  <div id="musicList">
+    <div class="topBar" :style="'background: rgba(100,208,156, '+ topBarAlpha +');'">
       <img class="returnButton" src="../assets/return-left.png" @click="returnPrePage" />
     </div>
 
@@ -21,13 +21,14 @@ import router from '../router/router'
 import SongList from '../components/SongList'
 
 export default {
-  name: "playList",
+  name: "musicList",
   data() {
     return {
       playListType: '',
       playListId: '',
       playListInfo: {},
-      playList: []
+      playList: [],
+      topBarAlpha: 0,//顶部topbar透明度
     }
   },
   components: {
@@ -54,6 +55,12 @@ export default {
     },
     returnPrePage() {
       router.go(-1)
+    },
+    scrollListen() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop < 260) {
+        this.topBarAlpha = scrollTop / 260 * 1
+      }
     }
   },
   mounted() {
@@ -65,21 +72,24 @@ export default {
     } else {
       this.getArtists(this.playListId)
     }
+    window.addEventListener("scroll", this.scrollListen)
   }
 }
 </script>
 
 <style lang="scss" scoped>
-#playList {
+#musicList {
   .topBar {
     width: 100%;
     height: 40px;
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 99999;
     .returnButton {
       height: 20px;
       width: 20px;
-      margin: 15px 0 0 5px;
+      margin: 10px 0 0 5px;
     }
   }
   .playListInfo {

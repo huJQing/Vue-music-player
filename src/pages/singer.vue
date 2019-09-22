@@ -111,7 +111,7 @@ export default {
       })
     },
     gotoSingerList(e) {
-      router.push('/playList/singerList/' + e)
+      router.push('/musicList/singerList/' + e)
     }
   },
   mounted() {
