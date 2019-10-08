@@ -30,12 +30,6 @@ export default {
         this.transitionName = 'slide-right';
       }
       window.console.log(this.transitionName)
-      //当然，如果你没有需要设置索引值为0的页面可以直接用着一段
-      /*if( to.meta.index < from.meta.index){
-            this.transitionName = 'slide-right';
-      }else{
-            this.transitionName = 'slide-left';
-      }*/
     }
   }
 }

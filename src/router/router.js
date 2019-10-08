@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/home',
     component: home,
-    meta: { index: 0 },//meta对象的index用来定义当前路由的层级,由小到大,由低到高
+    meta: { index: 0 },//meta对象的index用来定义当前路由的层级,由小到大,由低到高,决定过渡时的方向
     children: [
       {
         path: '/home',
@@ -44,11 +44,11 @@ const routes = [
   },
   {
     path: '/musicList/:type/:id',
-    meta: { index: 5 },//meta对象的index用来定义当前路由的层级,由小到大,由低到高 
+    meta: { index: 5 },
     component: musicList
   },
-  { path: '', redirect: '/home' },
-  { path: '/', redirect: '/home' }
+  { path: '/', redirect: '/home' },
+  { path: '*', redirect: '/home' },
 ]
 
 const router = new VueRouter({ routes })

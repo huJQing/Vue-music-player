@@ -167,7 +167,9 @@ export default {
       if (this.nowPlayMusicUrl != '') {
         if (!this.currentPlayFlag) {
           this.setCurrentPlayFlagState(true);
-          this.$refs.audio.src = this.nowPlayMusicUrl
+          if (this.$refs.audio.src == '') {
+            this.$refs.audio.src = this.nowPlayMusicUrl
+          }
           this.$refs.audio.play()
         } else {
           this.setCurrentPlayFlagState(false);

@@ -21,7 +21,7 @@ Vue.filter('httpToHttps', function (url) {
   return 'https' + url.slice(4)
 });
 
-//数字格式化（加单位）
+//数字格式化（数字大于万时加单位）
 Vue.filter('numFormat', function (num) {
   if (!num) return '';
   if (num < 10000) return num;
@@ -29,7 +29,7 @@ Vue.filter('numFormat', function (num) {
   return (num / 10000).toFixed(1) + '万'
 });
 
-//数字格式化（加单位）
+//时间格式化，将单位为毫秒的时间转换为xx:xx的格式
 Vue.filter('timeFormat', function (time) {
   if (time <= 0) {
     return '00:00';

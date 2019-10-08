@@ -21,6 +21,8 @@ export default {
       activeItem: ''
     }
   },
+  //传入的list必须是一个数组对象，每个对象需有一个code值
+  //itemKey指明对象中哪个键在界面中显示
   props: ['list', 'itemKey'],
   methods: {
     changeActive(e) {
