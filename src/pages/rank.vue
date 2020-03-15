@@ -1,7 +1,10 @@
 <template>
   <div id="rank">
     <section id="officialRankList">
-      <div class="officialRankListTitle" v-if="officialTopList.length">官方榜单</div>
+      <div
+        class="officialRankListTitle"
+        v-if="officialTopList.length"
+      >官方榜单</div>
       <div
         class="officialRankListItem"
         v-for="item of officialTopList"
@@ -9,12 +12,21 @@
         @click="gotoRankList(item.id)"
       >
         <div class="listCover">
-          <img :src="item.coverImgUrl" class="coverImg" />
+          <img
+            :src="item.coverImgUrl"
+            class="coverImg"
+          />
           <div class="playCount">
-            <img src="../assets/headset.png" class="headsetIcon" />
+            <img
+              src="../assets/headset.png"
+              class="headsetIcon"
+            />
             <div class="playCountNum">{{item.playCount | numFormat}}</div>
           </div>
-          <img src="../assets/pause.png" class="stopPlayIcon" />
+          <img
+            src="../assets/pause.png"
+            class="stopPlayIcon"
+          />
         </div>
         <div class="tracksList">
           <div
@@ -27,7 +39,10 @@
     </section>
 
     <section id="othersRankList">
-      <div class="othersRankListTitle" v-if="othersTopList.length">其他榜单</div>
+      <div
+        class="othersRankListTitle"
+        v-if="othersTopList.length"
+      >其他榜单</div>
       <div
         class="othersRankListItem"
         v-for="item of othersTopList"
@@ -35,12 +50,21 @@
         @click="gotoRankList(item.id)"
       >
         <div class="listCover">
-          <img :src="item.coverImgUrl" class="coverImg" />
+          <img
+            :src="item.coverImgUrl"
+            class="coverImg"
+          />
           <div class="playCount">
-            <img src="../assets/headset.png" class="headsetIcon" />
+            <img
+              src="../assets/headset.png"
+              class="headsetIcon"
+            />
             <div class="playCountNum">{{item.playCount | numFormat}}</div>
           </div>
-          <img src="../assets/pause.png" class="stopPlayIcon" />
+          <img
+            src="../assets/pause.png"
+            class="stopPlayIcon"
+          />
         </div>
       </div>
     </section>
@@ -53,25 +77,25 @@ import router from '../router/router'
 
 export default {
   name: 'rank',
-  data() {
+  data () {
     return {
       officialTopList: [],
       othersTopList: []
     }
   },
   methods: {
-    getToplistDetail() {
+    getToplistDetail () {
       getToplistDetail().then(e => {
         this.officialTopList = e.list.filter(item => item.tracks.length)
         this.othersTopList = e.list.filter(item => !item.tracks.length)
         window.console.log(this.othersTopList)
       })
     },
-    gotoRankList(e) {
+    gotoRankList (e) {
       router.push('/musicList/songlist/' + e)
     }
   },
-  mounted() {
+  mounted () {
     this.getToplistDetail()
   }
 }
@@ -96,16 +120,23 @@ export default {
       height: 100px;
       margin-bottom: 15px;
       @include listCover(false);
-    }
-    .tracksList {
-      font-size: 12px;
-      height: 56;
-      padding-top: 16px;
-      margin-left: 120px;
-      letter-spacing: 1px;
-      color: #555;
-      .tracks {
-        margin-top: 5px;
+      position: relative;
+      .tracksList {
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: #555;
+        position: absolute;
+        left: 120px;
+        top: 50%;
+        transform: translate(0, -50%);
+        .tracks {
+          margin-top: 5px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          word-break: break-all;
+          overflow: hidden;
+        }
       }
     }
   }

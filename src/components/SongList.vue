@@ -3,20 +3,15 @@
     <section class="songList" v-if="!noData">
       <div class="playListAllSong" @click="playListAllMusic()">
         <img src="../assets/pause-green.png" class="pauseIcon" v-if="songList" />
-        <p v-if="songList">全部播放（{{songList.length}}）</p>
+        <p v-if="songList">全部播放（{{ songList.length }}）</p>
       </div>
-      <div
-        class="songListItem"
-        v-for="(item,index) of songList"
-        :key="item.id"
-        @click="insertSongToList(item)"
-      >
-        <div class="songIndex">{{index+1}}</div>
+      <div class="songListItem" v-for="(item, index) of songList" :key="item.id" @click="insertSongToList(item)">
+        <div class="songIndex">{{ index + 1 }}</div>
         <div class="songInfo">
-          <div class="songName">{{item.name}}</div>
-          <div
-            class="songArtist"
-          >{{item.ar ? item.ar[0].name : item.artists[0].name}} &sdot; {{item.al ? item.al.name : item.album.name}}</div>
+          <div class="songName">{{ item.name }}</div>
+          <div class="songArtist">
+            {{ item.ar ? item.ar[0].name : item.artists[0].name }} &sdot; {{ item.al ? item.al.name : item.album.name }}
+          </div>
         </div>
       </div>
     </section>
@@ -32,8 +27,7 @@ import { getSongsDetail } from '../request/api'
 export default {
   name: 'SongList',
   data() {
-    return {
-    }
+    return {}
   },
   props: {
     //歌曲列表
@@ -57,13 +51,9 @@ export default {
       window.console.log(this.songList)
       this.playListAll(this.songList)
     },
-    ...mapActions([
-      'insertSong',
-      'playListAll'
-    ]),
+    ...mapActions(['insertSong', 'playListAll'])
   },
-  mounted() {
-  }
+  mounted() {}
 }
 </script>
 
